@@ -68,6 +68,22 @@ class CellTransmissionModelLink(Link):
       Link.__init__(self, timestep, freeFlowSpeed, backwardWaveSpeed, jamDensity, length, capacity, ID)
       # Create a cell for each timestep needed to traverse the link
       self.cells = list()
+      
+      # set proportion of cars
+      p = 1
+        
+      # set vehicle lengths (in feet)
+      busLength = 40
+      carLength = 15.75
+      
+      # override backward wave speed and jam density given derived equations
+      self.backwardWaveSpeed = ((p * carLength + (1 - p) * busLength) / timestep) * (3600/5280)
+      self.jamDensity = 1 / ((self.freeFlowSpeed * timestep + p * carLength + (1 - p) * busLength) / 5280)
+      
+      
+      print("jamDensity: ", self.jamDensity)
+      print("backwardWaveSpeed: ", self.backwardWaveSpeed)
+      
       for c in range(self.freeFlowTime):
          newCell = Cell(self.capacity, self.jamDensity * self.length / self.freeFlowTime, self.backwardWaveSpeed / self.freeFlowSpeed)
          self.cells.append(newCell)
