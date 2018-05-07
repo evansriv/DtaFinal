@@ -4,10 +4,10 @@
 
 # Link data
 # ID, Tail, head, freeFlowSpeed (mph), backwardWaveSpeed (mph), jamDensity (veh/mi), length (ft), capacity (vph), priority,type
-Upstream,1,2,60,30,200,2640,600,600,PQ
-Top,2,3,60,30,200,7920,600,600,PQ
-Bottom,2,3,60,30,20,2640,300,3600,SQ
-Downstream,3,4,60,30,200,2640,6000,600,PQ
+Upstream,1,2,60,30,200,2640,600,600,CTM
+Top,2,3,60,30,200,7920,600,600,CTM
+Bottom,2,3,60,30,20,2640,300,3600,CTM
+Downstream,3,4,60,30,200,2640,6000,600,CTM
 
 
 
