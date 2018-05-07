@@ -1,0 +1,22 @@
+# Points possible:
+2
+
+# Network file
+tests/tdsp/2link-network.txt
+
+# Origin, departure time
+1,2
+
+# Time-dependent link travel times
+A,2,3,4,5,6
+B,3,2,5,4,6
+
+# Correct cost labels
+2,6
+
+# Correct backlink labels
+N/A,A
+
+
+
+

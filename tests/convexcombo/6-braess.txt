@@ -1,0 +1,27 @@
+# Points possible:
+3
+
+# Network file
+tests/convexcombo/braess-network.txt
+
+# step size
+0.9
+
+# Original path flow matrix
+(1-2),(2-4),100,0,0,0
+(1-2),(2-3),(3-4),0,100,0,0
+(1-3),(3-4),0,0,100,0
+
+# Target path flow matrix
+(1-2),(2-4),0,100,0,0
+(1-2),(2-3),(3-4),100,0,0,0
+(1-3),(3-4),0,0,100,0
+
+# Correct new path flow matrix
+(1-2),(2-4),10,90,0,0
+(1-2),(2-3),(3-4),90,10,0,0
+(1-3),(3-4),0,0,100,0
+
+
+
+

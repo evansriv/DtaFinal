@@ -1,0 +1,18 @@
+# Network data
+# Number of links, number of nodes, timestep (seconds), time horizon
+2,2,1,20
+
+# Link data
+# ID, Tail, head, freeFlowSpeed (mph), backwardWaveSpeed (mph), jamDensity (veh/mi), length (ft), capacity (vph), priority,type
+A,1,2,60,30,200,88,10000,3600,PQ
+B,1,2,60,30,200,88,10000,3600,PQ
+
+# OD data
+# Origin, destination, demand values (# of demand values = time horizon)
+1,2,  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+# Points possible:
+1
+
+# Network file
+tests/convexcombo/1link-network.txt
+
+# step size
+0.5
+
+# Original path flow matrix
+(1-2),10,10,10,10,10
+
+# Target path flow matrix
+(1-2),5,5,5,5,5
+
+# Correct new path flow matrix
+(1-2),7.5,7.5,7.5,7.5,7.5
+
+
+

@@ -1,0 +1,35 @@
+# Points possible:
+2
+
+# Network file
+tests/convexcombo/exam-network.txt
+
+# step size
+0.5
+
+# Original path flow matrix
+1,28,0,0
+2,12,16,18
+3,0,0,42
+4,0,4,0
+
+# Target path flow matrix
+1,40,20,0
+2,0,0,60
+3,0,0,0
+4,0,0,0
+
+# Correct new path flow matrix
+1,34,10,0
+2,6,8,39
+3,0,0,21
+4,0,2,0
+
+
+
+
+
+
+
+
+
