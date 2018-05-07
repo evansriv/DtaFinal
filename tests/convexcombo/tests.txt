@@ -1,9 +1,3 @@
 # List of TDSP tests
 
-1-1link.txt
-2-1link-nostep.txt
-3-1link-fullstep.txt
-4-1link-halfstep.txt
-5-2link.txt
 6-braess.txt
-7-exam.txt
