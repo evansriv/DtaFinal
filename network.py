@@ -74,12 +74,21 @@ class Network:
       """
       
       #  *** YOUR CODE HERE ***
-
-      for time in range(self.timeHorizon):
-          for OD in self.ODs:
-              for path in OD.paths:
-                  self.pathFlows[path][time] = targetPathFlows[path][time] * stepSize + self.pathFlows[path][time] * (1 - stepSize)
+      # Replace the following statement with your code for 
+      # the convex combinations algorithm.  You should take the given
+      # path flows (self.pathFlows) and change them in place (no need to return 
+      # a value, just change the entries of self.pathFlows)
       
+      # loop over all timesteps and paths and update the pathflows given the equation for the convex combinations algorithm
+      # the purpose of the try-catch is to bypass an error that occurs when the path flow is not in targetPathFlows      
+      for t in range(self.timeHorizon):
+          for path in self.pathFlows:
+              try:
+                  self.pathFlows[path][t] = stepSize * targetPathFlows[path][t] + (1 - stepSize) * self.pathFlows[path][t]
+              except KeyError:
+                  self.pathFlows[path][t] = (1 - stepSize) * self.pathFlows[path][t]
+                  
+                
    def TDSP(self, origin, departureTime):
       """
       Executes a one-to-all time-dependent shortest path algorithm to find the best paths from
@@ -96,39 +105,47 @@ class Network:
       # Return the correct values of the cost and backlink labels when done.
       # Use the INFINITY macro for undefined cost labels, and the NO_PATH macro for
       # undefined backlink labels.
-      print('\n')
-      for c in range(self.numNodes):
-          cost[c] = INFINITY
-          backlink[c] = NO_PATH
+      
+      # create an empty list for keeping track of which nodes are finalized
+      finalizedNodes = list()
+      
+      # initialize the cost and backlink labels, and fill the finalizedNodes list with zeros
+      for n in range(self.numNodes):
+          cost[n] = INFINITY
+          backlink[n] = NO_PATH
+          finalizedNodes.append(0)
+      
+      # initialize the cost of the origin
       cost[origin] = departureTime
-      finalizedNodes = []
-      costSubset = list(cost)
-      for i in range(self.numNodes):
-          print('node',i)
-          print('costs',cost)
-          print('fN',finalizedNodes)
-          print('costSubset',costSubset)
-          if i not in finalizedNodes and cost[i] == min(costSubset):
-              finalizedNodes.append(i)
-              costSubset.remove(cost[i])
-              #print('finalizing ',i)
-              for ij in range(len(self.links)):
-                  if cost[i] + self.links[self.forwardStar[i][ij]].travelTime[departureTime] < self.timeHorizon:
-                      prevCost = cost[i+1]
-                      cost[i+1] = min(cost[i+1],cost[i] + self.links[self.forwardStar[i][ij]].travelTime[departureTime] )
-                      if cost[i+1] != prevCost:
-                          print(self.reverseStar[i-1][ij])
-                          backlink[i+1] = self.links[self.reverseStar[i-1][ij]].ID
-                  #print('link',ij)
-                  #print('for. star ',self.forwardStar[i][ij])
-                  #print('link ',self.links[ij])
-                  #print('link for*',self.links[self.forwardStar[i][ij]])
-                  #print('tt',self.links[self.forwardStar[i][ij]].travelTime)
-                  #print('tt',self.links[self.forwardStar[i][ij]].travelTime[departureTime+cost[i]])
-                  #if cost[i] + self.pathTravelTimes['self.forwardStar'][i] < self.timeHorizon:
-                  #    cost[self.links[ij].tail] = cost[i] + self.links[ij].travelTime[cost[i]]
-                  #    backlink[i+1] = ij
-                  print('end: cost, backlink',cost,backlink)
+      
+      # as long as there are still unfinalized nodes (given by zeros in the finalizedNodes list)
+      while 0 in finalizedNodes:
+          
+          # create two placeholder variables 
+          # minNode will keep track of the node with the minimum cost found so far
+          # currentMinCost will keep track of the minimum cost found so far
+          minNode = -1
+          currentMinCost = INFINITY
+          
+          # loop over all nodes. if the node is unfinalized and its cost is lower than the currentMinCost, update placeholder variables
+          for i in range(self.numNodes):
+              if finalizedNodes[i] == 0 and cost[i] < currentMinCost:
+                  currentMinCost = cost[i]
+                  minNode = i
+          
+          # for cases where there is no minimum node, break the loop
+          if minNode == -1:
+              break
+          
+            # otherwise, finalize the minNode
+          finalizedNodes[minNode] = 1  
+          
+          # for all the links coming from the minNode, perform the algorithm calculations
+          for i in self.forwardStar[minNode]:
+              if cost[minNode] + self.links[i].travelTime[cost[minNode]] < cost[self.links[i].head]:
+                  cost[self.links[i].head] = cost[minNode] + self.links[i].travelTime[cost[minNode]]
+                  backlink[self.links[i].head] = i
+
       return (cost, backlink)
    
    def DTA(self, numIterations = 100, targetAEC = 0.1):
