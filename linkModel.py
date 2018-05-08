@@ -75,12 +75,13 @@ class CellTransmissionModelLink(Link):
       # set vehicle lengths (in feet)
       busLength = 40
       carLength = 15.75
+      reactionTime = 1.25
       
       # override backward wave speed and jam density given derived equations
-      self.backwardWaveSpeed = ((p * carLength + (1 - p) * busLength) / timestep)
-      self.jamDensity = 1 / ((self.freeFlowSpeed * timestep + p * carLength + (1 - p) * busLength) )
+      self.backwardWaveSpeed = ((p * carLength + (1 - p) * busLength) / reactionTime)
+      self.jamDensity = 1 / ((self.freeFlowSpeed * reactionTime + p * carLength + (1 - p) * busLength) )
       
-      self.capacity = self.freeFlowSpeed / (self.freeFlowSpeed * timestep + p * carLength + (1 - p) * busLength) 
+      self.capacity = self.freeFlowSpeed / (self.freeFlowSpeed * reactionTime + p * carLength + (1 - p) * busLength) 
       
       print("jamDensity: ", self.jamDensity)
       print("backwardWaveSpeed: ", self.backwardWaveSpeed)
