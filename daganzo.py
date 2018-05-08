@@ -20,8 +20,6 @@ if __name__ == '__main__':
       print("Travel time: ", network.links[ij].travelTime[1:min(20,network.timeHorizon)])
       print("Upstream count: ", ["%.2f" % network.links[ij].upstreamCount(t) for t in range(min(20,network.timeHorizon))])
       print("Downstream count: ", ["%.2f" % network.links[ij].downstreamCount(t) for t in range(min(20,network.timeHorizon))])
-      print("jamDensity: ", network.links[ij].jamDensity)
-      print("backwardWaveSpeed: ", network.links[ij].backwardWaveSpeed)
    print("TSTT is ", network.calculateTSTT())
    
 

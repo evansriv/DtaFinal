@@ -83,8 +83,12 @@ class CellTransmissionModelLink(Link):
       
       self.capacity = self.freeFlowSpeed / (self.freeFlowSpeed * reactionTime + p * carLength + (1 - p) * busLength) 
       
+      # show link properties that were changed
+      print("Link: ",self.ID)
+      print("capacity: ", self.capacity)
       print("jamDensity: ", self.jamDensity)
       print("backwardWaveSpeed: ", self.backwardWaveSpeed)
+      print("----------------")
       
       for c in range(self.freeFlowTime):
          newCell = Cell(self.capacity, self.jamDensity * self.length / self.freeFlowTime, self.backwardWaveSpeed / self.freeFlowSpeed)

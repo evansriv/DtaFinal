@@ -142,10 +142,6 @@ class Network:
           
           # for all the links coming from the minNode, perform the algorithm calculations
           for i in self.forwardStar[minNode]:
-              print("minNode",minNode)
-              print("cost[minNode]",cost[minNode])
-              print("self.links[i].travelTime[cost[minNode]]",self.links[i].travelTime[cost[minNode]])
-              print("cost[self.links[i].head]",cost[self.links[i].head])
               if cost[minNode] + self.links[i].travelTime[cost[minNode]] < cost[self.links[i].head]:
                   cost[self.links[i].head] = cost[minNode] + self.links[i].travelTime[cost[minNode]]
                   backlink[self.links[i].head] = i
