@@ -1,1 +1,4 @@
-
+run code to generate results
+develop graphics for displaying results
+add network implementation to report
+proofread report
