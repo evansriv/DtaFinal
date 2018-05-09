@@ -70,7 +70,7 @@ class CellTransmissionModelLink(Link):
       self.cells = list()
       
       # set proportion of cars
-      p = 0.5
+      p = 0
         
       # set vehicle lengths (in feet) and driver reaction time (in seconds)
       busLength = 40
